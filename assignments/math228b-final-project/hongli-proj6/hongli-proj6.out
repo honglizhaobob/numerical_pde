@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.1}{Lax-Friedrichs Burger's Equation}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Analytical Calculation of Exact Solution}{section.1}% 2
+\BOOKMARK [3][-]{subsubsection.1.1.1}{characteristic curves in the x-t plane}{subsection.1.1}% 3
+\BOOKMARK [3][-]{subsubsection.1.1.2}{solution u at three times}{subsection.1.1}% 4
+\BOOKMARK [2][-]{subsection.1.2}{Weak formulation of the problem}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.3}{Matrix form of the semi-discrete problem}{section.1}% 6
+\BOOKMARK [1][-]{section.2}{Numerical Burger's Equation MATLAB Program Experiments: Linear Basis}{}% 7
+\BOOKMARK [2][-]{subsection.2.1}{Solutions using N = 4}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.2}{Solutions using N=10}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.3}{Solutions using N=20}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.4}{Solutions using N=50}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.5}{comment on refined mesh and observations}{section.2}% 12
+\BOOKMARK [1][-]{section.3}{Numerical Burger's Equation MATLAB Program Experiments: Lagrange Basis}{}% 13
+\BOOKMARK [2][-]{subsection.3.1}{numerical solution with P=3, N = 20 at two times t = 0.25 and t = 0.5}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.2}{numerical solution with P = 1, N = 20 at two times t = 0.25 and t = 0.5}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.3}{numerical solution with P = 1, N = 50 at two times t = 0.25 and t = 0.5}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.4}{Overlaid Comparison and Comments}{section.3}% 17

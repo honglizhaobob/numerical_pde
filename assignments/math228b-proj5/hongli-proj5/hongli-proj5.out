@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.1}{Properties of Triangulation K}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{degrees of freedom}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{continuity}{section.1}% 3
+\BOOKMARK [3][-]{subsubsection.1.2.1}{part 1, local continuity}{subsection.1.2}% 4
+\BOOKMARK [3][-]{subsubsection.1.2.2}{global continuity}{subsection.1.2}% 5
+\BOOKMARK [1][-]{section.2}{Neumann Problem Proofs}{}% 6
+\BOOKMARK [2][-]{subsection.2.1}{solution up to constant}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.2}{uniqueness?}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.3}{variational form}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.4}{ellipticity}{section.2}% 10
+\BOOKMARK [3][-]{subsubsection.2.4.1}{symmetry}{subsection.2.4}% 11
+\BOOKMARK [3][-]{subsubsection.2.4.2}{continuity}{subsection.2.4}% 12
+\BOOKMARK [3][-]{subsubsection.2.4.3}{V-elliptic}{subsection.2.4}% 13
+\BOOKMARK [3][-]{subsubsection.2.4.4}{L is continuous}{subsection.2.4}% 14
+\BOOKMARK [1][-]{section.3}{Properties of Triangulation Th}{}% 15
+\BOOKMARK [2][-]{subsection.3.1}{u-uhL2\(\)}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.2}{uhL2\(\) uL2\(\)}{section.3}% 17

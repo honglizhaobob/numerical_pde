@@ -1,0 +1,390 @@
+\documentclass[12pt]{article} % -- letter, article, report, book, memoir
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{wrapfig}
+\usepackage{physics}
+\usepackage{dsfont}
+%=====linear algebra and general math notations
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\cc}{\mathbb{C}}
+\newcommand{\re}{\mathrm{Re}}
+\newcommand{\im}{\mathrm{Im}}
+\newcommand{\infnorm}[1]{\norm{#1}_{\infty}}
+\newcommand{\twonorm}[1]{\norm{#1}_{2}}
+\newcommand{\onenorm}[1]{\norm{#1}_{1}}
+\newcommand{\iprod}[1]{\langle #1 \rangle}
+\newcommand{\generalmatrixA}{
+	\begin{pmatrix}
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{n1} & a_{n2} & \cdots & a_{nn} \\
+	\end{pmatrix}
+}
+%=====
+%===== probability theory and random processes
+\newcommand{\expect}[1]{\mathbb{E}\big[ {#1} \big]}
+\newcommand{\cov}[1]{\mathbb{C}ov({#1})}
+\newcommand{\pp}[1]{\mathbb{P}({#1})}
+\newcommand{\variance}[1]{\mathbb{V}ar\big[{#1}\big]}
+%=====
+%===== PDE theory
+\newcommand{\intervoo}[2]{(#1, #2)}
+\newcommand{\intervcc}[2]{\big[ #1, #2\big]}
+\newcommand{\pdx}[1]{\frac{\partial}{\partial {#1}}}
+\newcommand{\pddx}[1]{\frac{\partial^2}{\partial {#1}^2}}
+\newcommand{\uno}{\large \textcircled{\small{1}}}
+\newcommand{\dos}{\large\textcircled{\small{2}}}
+\newcommand{\tres}{\large\textcircled{\small{3}}}
+\newcommand{\yonn}{\large\textcircled{\small{4}}} % 4 in Japanese
+\newcommand{\cancels}[1]{\underbrace{#1}_\textrm{cancelled}}
+\newcommand{\ka}{\kappa}
+\newcommand{\ga}{\gamma}
+\newcommand{\uu}[2]{U_{#1}^{#2}} % shorthand
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+\newcommand{\1}[1]{\mathds{1}\left[#1\right]}
+
+% short hand
+\newcommand{\eps}{\epsilon}
+\newcommand{\sig}{\sigma}
+%=====
+\author{Hongli Zhao}
+\title{Math 228B: Project 5 Solutions}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+% ================ start file
+\section{Properties of Triangulation $K$}
+\subsection{degrees of freedom}
+The basis for the space $\mathbb{P}^2(K)$ is given by:
+$\{1,x_1,x_2,x_1x_2,x_1^2,x_2^2\}$ and therefore $\dim(\mathbb{P}^2(K)) = 6$, which is also given by the formula:
+$$
+	\dim\mathbb{P}^r({K}) = \frac{(r+1)(r+2)}{2}
+$$ and letting $r=2$ gives 6. By the given degrees of freedom, we see that the number of degrees of freedom is the same as the dimension of our functional space. To show uniqueness, we can show that $v\in\mathbb{P}^2(K)$ will be zero only when all degrees of freedom are set to 0.
+
+Consider a particular basis function $v_{1}\in\mathbb{P}^2(K)$ defined on $K$. Considering a particular edge of $K$ (denote as $a_ia_j$ for instance). Then on this edge we have $v_1(a_i) = v_1(a_j) = 0$, and $v_1(a_{ij}) = 0$. Using the factor theorem for polynomials, we can factor out a linear term from $v_1(x)$ using one of the roots, say $a_i$, and we have:
+$$
+	v_1(x) = \phi_i(x)w(x)
+$$ since the linear functional basis is uniquely determined and is from $\mathbb{P}^1(K)$, we must have $\phi_i(x)$ be the nodal basis function for node $a_i$.
+
+Proceeding to consider another edge, say $a_{j}a_{k}$, we let $v_1(a_j) = v_1(a_k) = v_1(a_{jk}) = 0$, by similar argument as above, we can factor out another linear term $\phi_j(x)$ from our $v_1(x)$ polynomial:
+$$
+	v_1(x) = \phi_i(x)\phi_j(x)\tilde{w}(x)
+$$ where $\phi_j \in \mathbb{P}^1(K)$ is another linear nodal basis function, uniquely determined by the degrees of freedom at the three vertices $a_i, a_j, a_k$.
+
+Then since we have factored out two linear terms, and $v_1$ is quadratic, we must have the remaining term $\tilde{w}$ be constant. Let $\tilde{w}(x) = c$ since we know it is a constant. Then we have:
+$$
+	v_1(x) = c\cdot\phi_{i}(x)\phi_j(x)
+$$
+
+Then using the last degree of freedom $v_1(a_{ik})$ would give us:
+$$
+	0 = v_1(a_{ik}) = c\cdot\phi_{i}(a_{ik})\phi_{j}(a_{ik}) = c\cdot\frac12\cdot\frac12 = \frac14 c
+$$ since $a_{ik}$ is a midpoint to a linear function matching endpoints 0 and 1. Then we have $c = 0$. Therefore $v_1$ is completely determined by the 6 degrees of freedom.
+
+\subsection{continuity}
+\subsubsection{part 1, local continuity}
+We can verify that $v\in\mathbb{P}^2(K)$ takes on the form:
+$$
+	v(x) = v(a_1)\phi_1(x)\cdot (2\phi_1(x) - 1) + v(a_2)\phi_2(x)(2\phi_2(x) -1) + v(a_3)\phi_3(x)(2\phi_3(x) -1)
+$$
+$$
+	+ v(a_{12})\cdot(4\phi_1(x)\phi_2(x)) + v(a_{13})\cdot(4\phi_1(x)\phi_3(x)) +
+	v(a_{23})\cdot(4\phi_2(x)\phi_3(x))
+$$
+$$
+	= \sum_{i=1}^3 v(a_i)\phi_i(x)(2\phi_i(x)-1) + 
+	\sum_{i,j=1; i<j}^3 v(a_{ij})\cdot (4\phi_{i}(x)\phi_j(x))
+$$ where $\phi_i$ is the nodal basis function defined on $K$ from $\mathbb{P}^1(K)$.
+
+Since all functions are uniquely determined from the 6 degrees of freedom, we can directly check if the left hand side and right hand side matches.
+
+We see:
+$$
+	v(a_k) = \sum_{i=1}^3v(a_i)\phi_i(a_k)(2\phi_i(a_k) - 1) + 0= v(a_k)\cdot 1\cdot (2-1) = v(a_k)
+$$ for $k=1,2,3$, since all points that do not match $k$ will yield a zero, and the second term will be zero since $\phi_i,\phi_j$ will never match.
+
+And at the midpoints:
+
+$$
+	v(a_{12}) = v(a_1)\phi_1(a_{12})(2\phi_1(a_{12}) - 1) + v(a_2)\phi_2(a_{12})(2\phi_2(a_{12}) - 1) + v(a_3)\phi_3(a_{12})(2\phi_3(a_{12}) - 1)
+$$
+$$
+	+ v(a_{12})\cdot(4\phi_1(a_{12})\phi_2(a_{12})) + v(a_{13})\cdot(4\phi_1(a_{12})\phi_3(a_{12})) + v(a_{23})\cdot(4\phi_{2}(a_{12})\phi_3(a_{12}))
+$$
+$$
+	= (2\cdot\frac12-1)v(a_1)\phi_1(a_{12}) + (2\cdot\frac12-1)v(a_1)\phi_1(a_{12}) + v(a_3)\cdot 0 \cdot(-1)
+$$
+$$
+	+ v(a_{12})\cdot(4\cdot\frac12\cdot\frac12) + v(a_{13})\cdot(4\cdot\frac12\cdot 0) + v(a_{23})\cdot(4\cdot \frac12\cdot 0)
+$$
+$$
+	= v(a_{12})
+$$
+
+By symmetry, we will have that this results holds true for the other midpoints $a_{23}, a_{13}$.
+
+Then we see that $v$ is a linear combination of $\phi_{i}\in\mathbb{P}^1(K), i = 1,2,3$. Since each $\phi_i$ is uniquely determined and continuous, we have $v\in\mathbb{P}^2(K)$ be continuous.
+
+\subsubsection{global continuity}
+To show that the function $v\in \mathbb{P}^{2}(K)$ is continuous. Consider two elements $K_1, K_2$, that shares a common side $S$. Then the let functions $v_1\in V_h(K_1)$, $v_2\in V_h(K_2)$ share the data $v_1(a_{1}) = v_2(a_{1}), v_{1}(a_{2}) = v_{2}(a_{2}), v_{1}(a_{12}) = v_2(a_{12})$.
+
+Then define:
+$$
+	w(x,y) = v_1(x,y) - v_2(x,y)
+$$ and $w \in \mathbb{P}^2(K)$. Since $w$ is quadratic on $S$, it can be completely determined by these 3 degrees of freedom on $S$, then by assumption:
+$$
+	w(a_1) = v_1(a_{1}) - v_2(a_{1}) = 0
+$$
+$$
+	w(a_2) = v_1(a_{2}) - v_2(a_{2}) = 0
+$$
+$$
+	w(a_{12}) = v_1(a_{12}) - v_2(a_{12}) = 0
+$$
+
+Then we have that $w = 0$ is uniformly 0 on $S$, which suggests $v_1 = v_2$ for all $x,y\in S$. Repeat the same proof on all elements $K_1,K_2,\cdots,K_m$, we have that $v\in \mathbb{P}^2(K)$ is continuous on the entire domain.
+
+
+\section{Neumann Problem Proofs}
+\subsection{solution up to constant}
+We can directly verify that $u + c$ is a solution to the Neumann problem if $u$ is a solution.
+
+First take the Laplacian in $\Omega$:
+$$
+	\Delta(u+c) = \sum_{i=1}^{n}\pddx{x_i}(u+c) = \sum_{i=1}^n\pddx{x_i}u + \sum_{i=1}^{n}\pddx{x_i}c = f + 0 = f
+$$
+
+On boundary $\Gamma$:
+$$
+	\pdx{n}(u+c) = \pdx{n}u + \pdx{n}c = g + 0 = g
+$$
+
+Therefore we have a solution $u$ up to a constant $c$.
+
+\subsection{uniqueness?}
+First we show that the solution $u$ is unique up to an additive constant. Suppose $u,v$ are both solutions for this Neumann problem, we let $w = u - v$. Then we must have:
+$$
+	\Delta w = \Delta u - \Delta v = f - f = 0
+$$ on $\Omega$. And for the normal derivative:
+$$
+	\pdx{n}w = \pdx{n}u - \pdx{n}v = g - g = 0
+$$ on $\Gamma$.
+
+Start from:
+$$
+	\Delta w = 0
+$$ we multiply $w$ and integrate over $\Omega$:
+$$
+	\int_{\Omega} w \cdot \Delta w dx = \int_{\Omega} 0 dx = 0
+$$ here we say the integral is 0 since $\Delta w$ is deterministically 0 on $\Omega$.
+
+Applying integration by parts, we see:
+$$
+	0 = \int_{\Omega} w \cdot \Delta w dx = 
+	-\int_{\Omega}\abs{\nabla w}^2 dx + \int_{\Gamma}w \pdx{n}w dS = -\int_{\Omega}\abs{\nabla w}^2 dx
+$$ since $\pdx{n}w$ is zero.
+
+Since $\abs{\nabla w}^{2}$ is $\ge 0$, this would imply that $\nabla w = 0$, this would mean that $w$ is constant, or $w = u - v = c$ where $c$ is a constant term. Then we have: $u = v + c$ and therefore the solution is unique up to an additive constant.
+
+Knowing that the solution is unique up to a constant. To prove our problem, we suppose that there are two solutions $u_1$ and $u_2 = u_1 + c$. Then define $w = u_2 - u_1 = c$.
+
+By assumption, if $u_1, u_2$ are solutions to our Neumann problem, we have:
+$$
+	\int_{\Omega}u_1 dx = \int_{\Omega}u_2 dx = 0
+$$
+
+Then consider:
+$$
+	\int_{\Omega}w dx = \int_{\Omega}(u_2 - u_1)dx = 0 - 0 = 0
+$$
+
+But by construction:
+$$
+	\int_{\Omega}wdx = \int_{\Omega}(u_2 - u_1)dx = \int_{\Omega}(u_1 + c - u_1)dx = \int_{\Omega} cdx = 0
+$$ since $c$ is a constant, this would mean that $c = 0$.
+
+Therefore $u_1 = u_2$. Uniqueness is guaranteed by the homogeneous condition.
+
+\subsection{variational form}
+(Note: this problem seems to be Problem 2.11 from the textbook, where there is a negative sign for $-\Delta u = f$, however, the current problem is $\Delta u = f$, which doesn't alter the problem signficantly).
+
+We have:
+$$
+	\begin{cases}
+		\Delta u = f, \text{ for $\Omega$} \\
+		\pdx{n}u = g, \text{ for $\Gamma$}\\
+		\int_{\Omega}udx = 0
+	\end{cases}
+$$
+
+We start with:
+$$
+	\Delta u = f
+$$ and take an arbitrary function $v \in V$, multiply on both sides:
+$$
+	\Delta u\cdot v = fv
+$$ and integrate over $\Omega$, apply Green's first identity:
+$$
+	\int_{\Omega}\Delta u\cdot v = \int_{\Omega}fv
+$$
+$$
+	\int_{\Omega}fv = \int_{\Omega}\Delta u \cdot v = -\int_{\Omega}\nabla u \nabla v + \int_{\Gamma}v(\nabla u \cdot n) = -\int_{\Omega}\nabla u\nabla v +\int_{\Gamma}v\cdot\pdx{n}u
+$$
+$$
+	= -\int_{\Omega}\nabla u\cdot\nabla v + \int_{\Gamma}gv
+$$
+
+Then the weak formulation is:
+Find $u \in V$ such that:
+$$
+	-\int_{\Omega}\nabla u\cdot\nabla v + \int_{\Gamma}gv = \int_{\Omega}fv
+$$ holds for all $v\in V$. Or equivalently:
+$$
+	\int_{\Omega}\nabla u\cdot\nabla v = \int_{\Gamma}gv - \int_{\Omega}fv
+$$
+
+\subsection{ellipticity}
+\subsubsection{symmetry}
+Define the bilinear form to be:
+$$
+	a(u, v) = \int_{\Omega}\nabla u\cdot\nabla v
+$$
+
+Then we see
+$$
+	a(v,u) = \int_{\Omega}\nabla v\cdot\nabla u = \int_{\Omega}\nabla u\cdot\nabla v = a(u,v)
+$$ and it is symmetric.
+
+\subsubsection{continuity}
+Continuity is given by applying Cauchy's inequality in $L_2(\Omega)$.
+$$
+	\abs{a(u,v)} = \abs{\int_{\Omega}\nabla u \cdot\nabla vd\Omega}
+	\le \sum_i \abs{\left<\frac{\partial u}{\partial x_i},\frac{\partial v}{\partial x_i}\right>_2}\\
+	\le \sum_i \norm{\frac{\partial u}{\partial x_i}}_2 \norm{\frac{\partial v}{\partial x_i}}_2
+$$
+$$
+	\le \left( \sum_i \norm{\frac{\partial u}{\partial x_i}}_2^2 \sum_j \norm{\frac{\partial v}{\partial x_j}}_2^2\right)^{\frac12}\\
+	\le \norm{u}_V\cdot\norm{v}_V.
+$$
+
+
+\subsubsection{V-elliptic}
+$$
+	a(v,v) = \int_{\Omega}\abs{\nabla v}^2dx = \norm{\nabla v}_2 = \frac12\norm{\nabla v}_2 + \frac12\norm{\nabla v}_2 \ge \frac12\norm{\nabla v}_2 + C\norm{v}_2
+$$ by Poincare's inequality, for some $C$.
+
+Choose $\alpha = \min\{\frac12, C\}$, we have:
+$$
+	\frac12\norm{\nabla v}_2 + C\norm{v}_2 
+	\ge
+	\alpha(\norm{\nabla v}_2 + \norm{v}_2) = \alpha \norm{v}^2_V
+$$ then the ellipticity is proven.
+
+\subsubsection{$L$ is continuous}
+Assuming $f\in l^2$, using Cauchy's inequality
+$$
+	\abs{L(v)} = \abs{\int_{\Gamma}gv - \int_{\Omega}fv}
+$$ here we define another $L^2(\Omega)$ function $\hat{g}$ to be an "extension" of $g$ to the domain:
+$$
+	\hat{g}(x,y) = 
+	\begin{cases}
+		0, \Omega / \Gamma \text{ or the interior of $\Omega$} \\
+		g(x,y), \text{on $\Gamma$}
+	\end{cases}
+$$ clearly $\hat{g}$ is square-integrable as well, on $\Omega$. Now we can consider:
+$$
+	\abs{L(v)} = \abs{\int_{\Omega}(G - f)vd\Omega}
+$$ then we can apply Cauchy's inequality on the functional space of $L^2(\Omega)$, we see:
+$$
+	\le \norm{G-f}_{L^2(\Omega)} \cdot \norm{v}_{L^2(\Omega)}
+$$
+
+Let $\Lambda = \norm{G-f}_{L^2(\Omega)}$, we have shown that $L$ is continuous, namely:
+$$
+	\abs{L(v)} \le \Lambda\cdot\norm{v}_{L^2(\Omega)}
+$$
+
+
+
+\section{Properties of Triangulation $T_h$}
+\subsection{$\norm{u-u_h}_{L^2(\Omega)}$}
+$$
+	\norm{u-u_h}_{L^2(\Omega)}^2 = (u-u_h, u-u_h) 
+	= (u,u-u_h) - (u_h, u-u_h)
+$$ since $u_h\in V_h$, and $u-u_h\in V_h^{\perp}$ given by the orthogonal projection, then we have:
+$$
+	= (u,u-u_h) - 0 = (u,u-u_h)
+$$ 
+
+Also by orthogonal projection, for any $v\in V_h$, we have:
+$$
+	(u-u_h, v) = (v, u-u_h) = 0
+$$ then we can subtract a zero term from our expression above:
+$$
+	\norm{u-u_h}_{L^2(\Omega)}^2= (u,u-u_h) - (v, u-u_h) = (u-v, u-u_h)
+$$ here we can use Cauchy's inequality:
+$$
+	\le \norm{u-v}_{L^2(\Omega)} \cdot \norm{u-u_h}_{L^2(\Omega)}
+$$ then divide both sides by $\norm{u-u_h}_{L^2(\Omega)}$ we have finally:
+$$
+	\norm{u-u_h}_{L^2(\Omega)} \le \norm{u-v}_{L^2(\Omega)}
+$$ 
+
+Since this holds true for all $v\in V_h$, it certainly holds true when $v$ is such that $\inf_{v\in V_h} \norm{u-v}_{L^2(\Omega)}$ is achieved, therefore we have the first half of the inequality:
+$$
+	\norm{u-u_h}_{L^2(\Omega)} \le \inf_{v\in V_h} \norm{u-v}_{L^2(\Omega)}
+$$
+
+For the other half of the inequality, we see (here we are using $L^2$ norms):
+$$
+	\inf_{v\in V_h}\norm{u - v}_{L^2(\Omega)} = 
+	\inf_{v\in V_h}\norm{u - \pi_h u + \pi_h u - v}_{L^2(\Omega)}
+$$
+$$
+	\le \inf_{v\in V_h}\bigg[
+	 \norm{u-\pi_h u}_{L^2(\Omega)} + \norm{\pi_h u - v}_{L^2(\Omega)}
+	\bigg]
+$$
+$$
+	= \norm{u - \pi_h u}_{L^2(\Omega)} + \inf_{v\in V_h}\norm{\pi_h u -v}_{L^2(\Omega)}
+$$ since the first term does not depend on $v$. Additionally, the infimum is attained by setting $v=\pi_hu$, the second term becomes 0.
+$$
+	= \norm{u - \pi_h u}_{L^2(\Omega)}
+$$ and we see this term is upper bounded by:
+$$
+	\le Ch^{r+1}\abs{u}_{H^{r+1}(\Omega)}
+$$ by the result from polynomial interpolation.
+
+Therefore we have proved the other half of the inequality:
+$$
+	\inf_{v\in V_h}\norm{u - v}_{L^2(\Omega)} \le
+	Ch^{r+1}\abs{u}_{H^{r+1}(\Omega)}
+$$
+\newcommand{\normltwo}[1]{\norm{{#1}}_{L^2(\Omega)}}
+\subsection{$\normltwo{u_h} \le \normltwo{u}$}
+The inequality is proved by applying Cauchy-Schwarz inequality in $L^2(\Omega)$:
+$$
+	\norm{u_h}_{L^2(\Omega)}^2 = (u_h, u_h)
+$$ since $u_h\in V_h$, and $u-u_h\in V_h^{\perp}$, we have $(u - u_h, u_h) = 0$ by orthogonal projection. This means $(u, u_h) = (u_h, u_h)$, we substitute into the above equation and apply Cauchy's inequality:
+$$
+	\norm{u_h}_{L^2(\Omega)}^2 = (u_h, u_h) = (u, u_h) \le \norm{u}_{L^2(\Omega)}\cdot\norm{u_h}_{L^2(\Omega)}
+$$
+
+Divide both sides by $\norm{u_h}_{L^2(\Omega)}$, we see:
+$$
+	\norm{u_h}_{L^2(\Omega)} \le \norm{u}_{L^2(\Omega)}
+$$
+% ================ end file
+\end{document}
+
