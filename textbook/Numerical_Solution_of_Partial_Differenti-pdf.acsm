@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fulfillmentToken fulfillmentType="buy" xmlns="http://ns.adobe.com/adept">
+<distributor>urn:uuid:00000000-0000-0000-0000-000000000001</distributor>
+<operatorURL>http://books.google.com/books/acs4/fulfillment</operatorURL>
+<expiration>2020-04-05T16:38:44-07:00</expiration>
+<transaction>ge:b616ac11-2533-feff-b751-bbf41e8a473a:1586129024543059</transaction>
+<userId>12776408723927331195</userId>
+<resourceItemInfo>
+<resource>urn:uuid:b616ac11-2533-feff-b751-bbf41e8a473a</resource>
+<resourceItem>1</resourceItem>
+<src>https://books.google.com/books/download/Numerical_Solution_of_Partial_Differenti.pdf?acsid=urn:uuid:b616ac11-2533-feff-b751-bbf41e8a473a&amp;output=acs4_book_bytes&amp;ar=6598e69b912be5d9b60520640830a1fe</src>
+<downloadType>simple</downloadType>
+</resourceItemInfo>
+<hmac>u0mXv/cQvNbf7aW+uucIM/Oz1XM=</hmac>
+</fulfillmentToken>
